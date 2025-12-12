@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rishikeshan - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@100;200;300;400;500;600;700;800;900&family=SF+Pro+Text:wght@100;200;300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .sf-pro-text {
+            font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        /* Apple-inspired color palette */
+        :root {
+            --apple-blue: #007AFF;
+            --apple-gray: #8E8E93;
+            --apple-light-gray: #F2F2F7;
+            --apple-dark: #1D1D1F;
+            --apple-white: #FBFBFD;
+            --apple-green: #30D158;
+            --apple-orange: #FF9500;
+            --apple-red: #FF3B30;
+            --apple-purple: #AF52DE;
+        }
+        
+        body {
+            background: var(--apple-white);
+            color: var(--apple-dark);
+            overflow-x: hidden;
+        }
+        
+        /* Apple-style navigation */
+        .apple-nav {
+            background: rgba(251, 251, 253, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Hero section with Apple-style gradients */
+        .hero-section {
+            background: linear-gradient(135deg, var(--apple-white) 0%, #F5F5F7 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--apple-dark) 0%, var(--apple-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 300;
+            color: var(--apple-gray);
+            letter-spacing: -0.01em;
+        }
+        
+        /* Apple-style cards */
+        .apple-card {
+            background: var(--apple-white);
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 0.5px solid rgba(0, 0, 0, 0.04);
+        }
+        
+        .apple-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        /* Apple-style buttons */
+        .apple-button {
+            background: var(--apple-blue);
+            color: white;
+            border: none;
+            border-radius: 980px;
+            padding: 12px 24px;
+            font-weight: 400;
+            font-size: 17px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .apple-button:hover {
+            background: #0056CC;
+            transform: scale(1.02);
+        }
+        
+        .apple-button-secondary {
+            background: transparent;
+            color: var(--apple-blue);
+            border: 1px solid var(--apple-blue);
+        }
+        
+        .apple-button-secondary:hover {
+            background: var(--apple-blue);
+            color: white;
+        }
+        
+        /* Smooth animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Apple-style sections */
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--apple-dark);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 300;
+            color: var(--apple-gray);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Skills with Apple-style icons */
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Project cards with Apple aesthetics */
+        .project-card {
+            background: var(--apple-white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .project-image {
+            height: 240px;
+            background: linear-gradient(135deg, var(--apple-light-gray) 0%, #E5E5EA 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Contact section with Apple styling */
+        .contact-section {
+            background: linear-gradient(135deg, var(--apple-light-gray) 0%, var(--apple-white) 100%);
+        }
+        
+        .contact-card {
+            background: var(--apple-white);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        /* Apple-style form inputs */
+        .apple-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            background: var(--apple-white);
+            font-size: 17px;
+            transition: all 0.2s ease;
+        }
+        
+        .apple-input:focus {
+            outline: none;
+            border-color: var(--apple-blue);
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+        }
+        
+        /* WhatsApp floating button with Apple design */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            background: var(--apple-green);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(48, 209, 88, 0.3);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(48, 209, 88, 0.4);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Apple-style navigation links */
+        .nav-link {
+            color: var(--apple-dark);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 17px;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--apple-blue);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--apple-blue);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Apple-style typography */
+        .apple-text-large {
+            font-size: 21px;
+            font-weight: 400;
+            line-height: 1.4;
+            color: var(--apple-dark);
+        }
+        
+        .apple-text-body {
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--apple-gray);
+        }
+        
+        /* 3D person with Apple aesthetics */
+        .person-avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--apple-blue), var(--apple-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            box-shadow: 0 10px 40px rgba(0, 122, 255, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .person-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 50px rgba(0, 122, 255, 0.3);
+        }
+        
+        .person-avatar::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border-radius: 50%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><linearGradient id="personGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23000000;stop-opacity:0.8" /><stop offset="50%" style="stop-color:%2387CEEB;stop-opacity:0.6" /><stop offset="100%" style="stop-color:%23000000;stop-opacity:0.8" /></linearGradient></defs><circle cx="100" cy="70" r="25" fill="url(%23personGrad)"/><ellipse cx="100" cy="140" rx="35" ry="45" fill="url(%23personGrad)"/></svg>') center/cover;
+        }
+    </style>
+</head>
+<body>
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/9444100901?text=Hi,%20Rishikeshan" target="_blank" class="whatsapp-float">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+        </svg>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="apple-nav fixed top-0 w-full z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-semibold" style="color: var(--apple-dark);">RK</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+                <button id="mobile-menu" class="md:hidden">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section flex items-center justify-center text-center px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="person-avatar fade-up"></div>
+            <h1 class="hero-title fade-up mb-6">Rishikeshan</h1>
+            <p class="hero-subtitle fade-up mb-12">Full Stack Developer & Cybersecurity Expert</p>
+            <div class="fade-up flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://www.linkedin.com/in/rishi-keshan-15b9982b8/recent-activity/all/" target="_blank" class="apple-button inline-block text-center">View My Work</a>
+                <a href="#contact" class="apple-button apple-button-secondary inline-block text-center">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 fade-up">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Passionate about creating innovative solutions and securing digital experiences</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="fade-up">
+                    <div class="apple-card p-8 text-center">
+                        <div class="text-8xl mb-6">🚀</div>
+                        <h3 class="apple-text-large mb-4">Innovation Driven</h3>
+                        <p class="apple-text-body">Always exploring new technologies and pushing boundaries</p>
+                    </div>
+                </div>
+                <div class="fade-up">
+                    <h3 class="apple-text-large mb-6">Hello, I'm Rishikeshan</h3>
+                    <p class="apple-text-body mb-6">
+                        I'm a versatile full-stack developer with expertise in cybersecurity and penetration testing. 
+                        I love creating secure, scalable applications while ensuring robust security measures.
+                    </p>
+                    <p class="apple-text-body mb-8">
+                        My passion lies in solving complex problems through code and securing digital infrastructures 
+                        against potential threats. I believe in continuous learning and staying updated with the latest technologies.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Innovative</span>
+                        <span class="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium">Security-Focused</span>
+                        <span class="px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">Problem Solver</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-6" style="background: var(--apple-light-gray);">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 fade-up">
+                <h2 class="section-title">Skills & Expertise</h2>
+                <p class="section-subtitle">Technologies and tools I work with to bring ideas to life</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Frontend Developer -->
+                <div class="apple-card p-8 text-center fade-up">
+                    <div class="skill-icon mx-auto" style="background: linear-gradient(135deg, #FF9500, #FF6B35);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+                            <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/>
+                        </svg>
+                    </div>
+                    <h3 class="apple-text-large mb-4">Frontend Developer</h3>
+                    <p class="apple-text-body mb-6">Creating beautiful, responsive user interfaces with modern web technologies</p>
+                    <div class="space-y-3">
+                        <div class="bg-orange-50 text-orange-800 px-4 py-2 rounded-lg font-medium">HTML & CSS</div>
+                        <div class="bg-yellow-50 text-yellow-800 px-4 py-2 rounded-lg font-medium">JavaScript</div>
+                    </div>
+                </div>
+
+                <!-- Cyber Security -->
+                <div class="apple-card p-8 text-center fade-up">
+                    <div class="skill-icon mx-auto" style="background: linear-gradient(135deg, #FF3B30, #D70015);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+                            <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.4 16,13V16C16,17.4 15.4,18 14.8,18H9.2C8.6,18 8,17.4 8,16V13C8,12.4 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="apple-text-large mb-4">Cyber Security</h3>
+                    <p class="apple-text-body mb-6">Protecting digital assets and ensuring secure application development</p>
+                    <div class="space-y-3">
+                        <div class="bg-red-50 text-red-800 px-4 py-2 rounded-lg font-medium">Network Security</div>
+                        <div class="bg-pink-50 text-pink-800 px-4 py-2 rounded-lg font-medium">Penetration Testing</div>
+                    </div>
+                </div>
+
+                <!-- Backend Developer -->
+                <div class="apple-card p-8 text-center fade-up">
+                    <div class="skill-icon mx-auto" style="background: linear-gradient(135deg, #007AFF, #0056CC);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+                            <path d="M4,6H20V16H4M20,18A2,2 0 0,0 22,16V6C22,4.89 21.1,4 20,4H4C2.89,4 2,4.89 2,6V16A2,2 0 0,0 4,18H0V20H24V18H20Z"/>
+                            <circle cx="6" cy="8" r="1"/>
+                            <circle cx="9" cy="8" r="1"/>
+                            <circle cx="12" cy="8" r="1"/>
+                            <rect x="6" y="10" width="12" height="1"/>
+                            <rect x="6" y="12" width="8" height="1"/>
+                            <rect x="6" y="14" width="10" height="1"/>
+                        </svg>
+                    </div>
+                    <h3 class="apple-text-large mb-4">Backend Developer</h3>
+                    <p class="apple-text-body mb-6">Building robust server-side applications and database architectures</p>
+                    <div class="space-y-3">
+                        <div class="bg-blue-50 text-blue-800 px-4 py-2 rounded-lg font-medium">Java Programming</div>
+                        <div class="bg-indigo-50 text-indigo-800 px-4 py-2 rounded-lg font-medium">SQL</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 fade-up">
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">A showcase of my recent work and creative solutions</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Winter Clothes Store -->
+                <div class="project-card fade-up">
+                    <div class="project-image">
+                        <svg width="200" height="160" viewBox="0 0 300 200">
+                            <defs>
+                                <linearGradient id="winterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#007AFF"/>
+                                    <stop offset="50%" style="stop-color:#FBFBFD"/>
+                                    <stop offset="100%" style="stop-color:#AF52DE"/>
+                                </linearGradient>
+                            </defs>
+                            <!-- Winter jacket -->
+                            <path d="M80 40 Q90 30 110 30 Q130 30 140 40 L145 60 Q150 65 155 70 L160 100 Q165 120 160 140 L155 160 Q150 170 140 175 L110 175 Q90 170 85 160 L80 140 Q75 120 80 100 L85 70 Q90 65 95 60 Z" fill="url(#winterGrad)" stroke="#007AFF" stroke-width="2"/>
+                            <!-- Shopping elements -->
+                            <rect x="200" y="50" width="80" height="60" rx="8" fill="#F2F2F7" stroke="#007AFF" stroke-width="2"/>
+                            <circle cx="220" cy="130" r="8" fill="#007AFF"/>
+                            <circle cx="260" cy="130" r="8" fill="#007AFF"/>
+                            <text x="240" y="85" text-anchor="middle" fill="#007AFF" font-size="12" font-weight="600">STORE</text>
+                        </svg>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="apple-text-large mb-4">Winter Clothes Store</h3>
+                        <p class="apple-text-body mb-6">
+                            A comprehensive e-commerce platform for winter clothing with advanced filtering, 
+                            secure payment integration, and responsive design for optimal user experience.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">React</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">Node.js</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">MongoDB</span>
+                        </div>
+                        <a href="https://github.com/rishikeshan28/Winter-Clothes.git" target="_blank" class="apple-button inline-block">View Project</a>
+                    </div>
+                </div>
+
+                <!-- Personal Portfolio -->
+                <div class="project-card fade-up">
+                    <div class="project-image">
+                        <svg width="200" height="160" viewBox="0 0 300 200">
+                            <defs>
+                                <linearGradient id="portfolioGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#1D1D1F"/>
+                                    <stop offset="50%" style="stop-color:#007AFF"/>
+                                    <stop offset="100%" style="stop-color:#FBFBFD"/>
+                                </linearGradient>
+                            </defs>
+                            <!-- Laptop -->
+                            <rect x="80" y="60" width="140" height="90" rx="8" fill="url(#portfolioGrad)" stroke="#1D1D1F" stroke-width="2"/>
+                            <rect x="90" y="70" width="120" height="70" rx="4" fill="#FBFBFD"/>
+                            <!-- Portfolio content -->
+                            <circle cx="110" cy="90" r="8" fill="#007AFF"/>
+                            <text x="115" y="95" text-anchor="start" fill="#1D1D1F" font-size="8" font-weight="600">RK Portfolio</text>
+                            <rect x="130" y="105" width="60" height="3" fill="#8E8E93"/>
+                            <rect x="130" y="115" width="45" height="3" fill="#007AFF"/>
+                            <rect x="130" y="125" width="50" height="3" fill="#AF52DE"/>
+                            <!-- Keyboard -->
+                            <rect x="70" y="160" width="160" height="20" rx="8" fill="#F2F2F7" stroke="#1D1D1F" stroke-width="1"/>
+                        </svg>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="apple-text-large mb-4">Personal Portfolio</h3>
+                        <p class="apple-text-body mb-6">
+                            A modern, responsive portfolio website showcasing my skills, projects, and experience 
+                            with stunning animations and interactive elements for enhanced user engagement.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm">HTML</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">CSS</span>
+                            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">JavaScript</span>
+                        </div>
+                        <a href="https://github.com/rishikeshan28/Personal-Portfolio.git" target="_blank" class="apple-button inline-block">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16 fade-up">
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-subtitle">Ready to work together? Let's create something amazing!</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="fade-up">
+                    <h3 class="apple-text-large mb-6 md:mb-8">Get In Touch</h3>
+                    <div class="space-y-4">
+                        <!-- LinkedIn -->
+                        <a href="https://www.linkedin.com/in/rishi-keshan-15b9982b8/" target="_blank" class="contact-card flex items-center space-x-4 block">
+                            <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="font-semibold">LinkedIn</p>
+                                <p class="apple-text-body text-sm">Connect professionally</p>
+                            </div>
+                        </a>
+                        
+                        <!-- GitHub -->
+                        <a href="https://github.com/rishikeshan28?tab=repositories" target="_blank" class="contact-card flex items-center space-x-4 block">
+                            <div class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="font-semibold">GitHub</p>
+                                <p class="apple-text-body text-sm">View repositories</p>
+                            </div>
+                        </a>
+                        
+                        <!-- Email -->
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=rishikeshan06@gmail.com&su=Hello%20Rishikeshan&body=Hi%20Rishikeshan,%0A%0A" target="_blank" class="contact-card flex items-center space-x-4 block">
+                            <div class="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                                    <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.904.732-1.636 1.636-1.636h3.819l6.545 4.91 6.545-4.91h3.819A1.636 1.636 0 0 1 24 5.457z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Email</p>
+                                <p class="apple-text-body text-sm">rishikeshan06@gmail.com</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="fade-up">
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <input type="text" id="name" placeholder="Your Name" class="apple-input sf-pro-text">
+                        </div>
+                        <div>
+                            <input type="email" id="email" placeholder="Your Email" class="apple-input sf-pro-text">
+                        </div>
+                        <div>
+                            <textarea id="message" rows="5" placeholder="Your Message" class="apple-input sf-pro-text resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="apple-button w-full">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6" style="background: var(--apple-dark); color: var(--apple-white);">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <p class="sf-pro-text" style="color: var(--apple-gray);">&copy; 2024 Rishikeshan. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://www.linkedin.com/in/rishi-keshan-15b9982b8/" target="_blank" class="sf-pro-text hover:text-blue-400 transition-colors" style="color: var(--apple-gray);">LinkedIn</a>
+                    <a href="https://github.com/rishikeshan28?tab=repositories" target="_blank" class="sf-pro-text hover:text-blue-400 transition-colors" style="color: var(--apple-gray);">GitHub</a>
+                    <a href="https://wa.me/9444100901?text=Hi,%20Rishikeshan" target="_blank" class="sf-pro-text hover:text-blue-400 transition-colors" style="color: var(--apple-gray);">WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-up animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-up elements
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Contact form handling
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            if (name && email && message) {
+                // Create Apple-style success modal
+                const modal = document.createElement('div');
+                modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+                modal.innerHTML = `
+                    <div class="bg-white p-8 rounded-2xl max-w-md mx-4 text-center" style="box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                            </svg>
+                        </div>
+                        <h3 class="apple-text-large mb-4" style="color: var(--apple-dark);">Message Sent!</h3>
+                        <p class="apple-text-body mb-6">Thanks for reaching out! I'll get back to you soon.</p>
+                        <button onclick="this.parentElement.parentElement.remove()" class="apple-button">
+                            Close
+                        </button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                
+                // Reset form
+                this.reset();
+            } else {
+                // Create Apple-style error modal
+                const modal = document.createElement('div');
+                modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+                modal.innerHTML = `
+                    <div class="bg-white p-8 rounded-2xl max-w-md mx-4 text-center" style="box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);">
+                        <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                            </svg>
+                        </div>
+                        <h3 class="apple-text-large mb-4" style="color: var(--apple-dark);">Oops!</h3>
+                        <p class="apple-text-body mb-6">Please fill in all fields before sending your message.</p>
+                        <button onclick="this.parentElement.parentElement.remove()" class="apple-button">
+                            Got it
+                        </button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            }
+        });
+
+        // Apple-style parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-section');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            // Mobile menu functionality can be added here
+            console.log('Mobile menu clicked');
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96af7d9d213dc1bd',t:'MTc1NDQ5MzMzNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
